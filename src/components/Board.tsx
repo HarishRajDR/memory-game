@@ -1,5 +1,8 @@
+import { gridGenerate } from "../lib/grid";
 import { useBoardStore } from "../lib/store";
 import Symbol from "./Symbol";
+
+const grid = gridGenerate();
 
 function Board() {
   const turns = useBoardStore((state) => state.turns);
@@ -57,8 +60,6 @@ function Board() {
   ];
 
   const reset = useBoardStore((state) => state.reset);
-
-  const grid = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   const checkTurns = () => {
     if (turns == 1) {
