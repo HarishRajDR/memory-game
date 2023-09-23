@@ -18,17 +18,53 @@ function Board() {
       stateVariable: useBoardStore((state) => state.three),
       stateFunction: useBoardStore((state) => state.updateThree),
     },
+    {
+      stateVariable: useBoardStore((state) => state.four),
+      stateFunction: useBoardStore((state) => state.updateFour),
+    },
+    {
+      stateVariable: useBoardStore((state) => state.five),
+      stateFunction: useBoardStore((state) => state.updateFive),
+    },
+    {
+      stateVariable: useBoardStore((state) => state.six),
+      stateFunction: useBoardStore((state) => state.updateSix),
+    },
+    {
+      stateVariable: useBoardStore((state) => state.seven),
+      stateFunction: useBoardStore((state) => state.updateSeven),
+    },
+    {
+      stateVariable: useBoardStore((state) => state.eight),
+      stateFunction: useBoardStore((state) => state.updateEight),
+    },
+    {
+      stateVariable: useBoardStore((state) => state.nine),
+      stateFunction: useBoardStore((state) => state.updateNine),
+    },
+    {
+      stateVariable: useBoardStore((state) => state.ten),
+      stateFunction: useBoardStore((state) => state.updateTen),
+    },
+    {
+      stateVariable: useBoardStore((state) => state.eleven),
+      stateFunction: useBoardStore((state) => state.updateEleven),
+    },
+    {
+      stateVariable: useBoardStore((state) => state.tweleve),
+      stateFunction: useBoardStore((state) => state.updateTweleve),
+    },
   ];
 
   const reset = useBoardStore((state) => state.reset);
 
-  const grid = [0, 1, 2];
+  const grid = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   const checkTurns = () => {
     if (turns == 1) {
       setTimeout(() => {
         reset();
-      }, 1000);
+      }, 2000);
     }
   };
   return (
@@ -47,7 +83,7 @@ function Board() {
               : "bg-primary w-40 aspect-[3/4] rounded-md flex items-center justify-center"
           }
         >
-          <div className={boardData[idx].stateVariable ? "" : "hidden"}>
+          <div className={boardData[idx].stateVariable ? "" : ""}>
             <Symbol symbol={p} />
           </div>
         </button>
