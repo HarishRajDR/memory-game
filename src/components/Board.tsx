@@ -61,6 +61,8 @@ function Board() {
 
   const reset = useBoardStore((state) => state.reset);
 
+  const grid = [0, 1, 2];
+
   const checkTurns = () => {
     if (turns == 1) {
       setTimeout(() => {
