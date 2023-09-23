@@ -1,38 +1,6 @@
+import { useBoardStore } from "../lib/store";
 import S1 from "./symbols/S1";
 import S2 from "./symbols/S2";
-import { create } from "zustand";
-
-type State = {
-  turns: number;
-  one: boolean;
-  two: boolean;
-  three: boolean;
-};
-
-type Action = {
-  updateTurn: () => void;
-  updateOne: (p: State["one"]) => void;
-  updateTwo: (p: State["two"]) => void;
-  updateThree: (p: State["three"]) => void;
-  reset: () => void;
-};
-
-const initialValues: State = {
-  turns: 0,
-  one: false,
-  two: false,
-  three: false,
-};
-
-// Create your store, which includes both state and (optionally) actions
-const useBoardStore = create<State & Action>((set, get) => ({
-  ...initialValues,
-  updateTurn: () => set(() => ({ turns: get().turns + 1 })),
-  updateOne: (p) => set(() => ({ one: p })),
-  updateTwo: (p) => set(() => ({ two: p })),
-  updateThree: (p) => set(() => ({ three: p })),
-  reset: () => set(initialValues),
-}));
 
 function Board() {
   const turns = useBoardStore((state) => state.turns);
@@ -50,17 +18,18 @@ function Board() {
   const reset = useBoardStore((state) => state.reset);
 
   const checkTurns = () => {
-    if (turns == 2) {
-      console.log("Two turns completed");
-      reset();
+    if (turns == 1) {
+      setTimeout(() => {
+        reset();
+      }, 1000);
     }
   };
   return (
     <div className="grid gap-5 grid-cols-4">
       <button
         onClick={() => {
-          updateOne(true);
           updateTurns();
+          updateOne(true);
           checkTurns();
         }}
         disabled={turns == 2}
@@ -76,8 +45,8 @@ function Board() {
       </button>
       <button
         onClick={() => {
-          updateLast(true);
           updateTurns();
+          updateLast(true);
           checkTurns();
         }}
         disabled={turns == 2}
@@ -93,8 +62,8 @@ function Board() {
       </button>
       <button
         onClick={() => {
-          updateThree(true);
           updateTurns();
+          updateThree(true);
           checkTurns();
         }}
         disabled={turns == 2}
