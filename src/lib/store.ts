@@ -18,6 +18,7 @@ type State = {
 
 type Action = {
   updateTurn: () => void;
+  resetTurn: () => void;
   updateOne: (p: State["one"]) => void;
   updateTwo: (p: State["two"]) => void;
   updateThree: (p: State["three"]) => void;
@@ -52,6 +53,7 @@ const initialValues: State = {
 export const useBoardStore = create<State & Action>((set, get) => ({
   ...initialValues,
   updateTurn: () => set(() => ({ turns: get().turns + 1 })),
+  resetTurn: () => set(() => ({ turns: 0 })),
   updateOne: (p) => set(() => ({ one: p })),
   updateTwo: (p) => set(() => ({ two: p })),
   updateThree: (p) => set(() => ({ three: p })),

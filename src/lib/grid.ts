@@ -17,6 +17,6 @@ export const gridGenerate = () => {
   var b = new Array(12).fill(0);
   for (var i = 0; i < 6; ++i) a[i] = i;
   a = shuffle(a);
-  b = a.concat(a);
+  b = shuffle(a.concat(a));
   return b;
 };

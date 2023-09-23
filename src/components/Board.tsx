@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { gridGenerate } from "../lib/grid";
 import { useBoardStore } from "../lib/store";
 import Symbol from "./Symbol";
@@ -5,8 +6,12 @@ import Symbol from "./Symbol";
 const grid = gridGenerate();
 
 function Board() {
+  const [selected1, setSelected1] = useState<number | null>(null);
+  const [selected2, setSelected2] = useState<number | null>(null);
+
   const turns = useBoardStore((state) => state.turns);
   const updateTurns = useBoardStore((state) => state.updateTurn);
+  const resetTurns = useBoardStore((state) => state.resetTurn);
 
   const boardData = [
     {
@@ -61,21 +66,41 @@ function Board() {
 
   const reset = useBoardStore((state) => state.reset);
 
-  const checkTurns = () => {
-    if (turns == 1) {
-      setTimeout(() => {
-        reset();
-      }, 2000);
+  useEffect(() => {
+    check();
+  }, [turns]);
+
+  function update(h: number) {
+    if (turns == 0) {
+      setSelected1(h);
     }
-  };
+    if (turns == 1) {
+      setSelected2(h);
+    }
+  }
+
+  function check() {
+    if (turns == 2) {
+      if (selected1 == selected2) {
+        resetTurns();
+      } else
+        setTimeout(() => {
+          reset();
+          setSelected1(null);
+          setSelected2(null);
+        }, 200);
+    }
+  }
+
   return (
     <div className="grid gap-5 grid-cols-4">
       {grid.map((p, idx) => (
         <button
+          key={idx}
           onClick={() => {
             updateTurns();
             boardData[idx].stateFunction(true);
-            checkTurns();
+            update(p);
           }}
           disabled={turns == 2}
           className={
