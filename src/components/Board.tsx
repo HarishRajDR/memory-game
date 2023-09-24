@@ -117,6 +117,7 @@ function Board() {
     if (turns == 2) {
       if (
         selected1.contents == selected2.contents &&
+        selected1.gridNo != selected2.gridNo &&
         selected1.gridNo != null &&
         selected2.gridNo != null
       ) {
@@ -148,7 +149,11 @@ function Board() {
               };
               update(h);
             }}
-            disabled={turns == 2 || boardData[idx].stateCorrect}
+            disabled={
+              turns == 2 ||
+              boardData[idx].stateCorrect ||
+              boardData[idx].stateVariable
+            }
             className={
               boardData[idx].stateVariable || boardData[idx].stateCorrect
                 ? "bg-secondary w-40 aspect-[3/4] rounded-md flex items-center justify-center"
