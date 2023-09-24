@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { gridGenerate } from "../lib/grid";
 import { useBoardStore } from "../lib/store";
 import Symbol from "./Symbol";
+import ReactConfetti from "react-confetti";
 
 type selected = {
   gridNo: number | null;
@@ -18,6 +19,8 @@ const grid = gridGenerate();
 function Board() {
   const [selected1, setSelected1] = useState<selected>(selectedInit);
   const [selected2, setSelected2] = useState<selected>(selectedInit);
+
+  const [confetti, setConfetti] = useState<boolean>(false);
 
   const turns = useBoardStore((state) => state.turns);
   const updateTurns = useBoardStore((state) => state.updateTurn);
@@ -135,6 +138,7 @@ function Board() {
 
   return (
     <main className="flex flex-col items-center justify-center gap-20">
+      <ReactConfetti run={confetti} />
       <h1 className="text-5xl font-bricolageGrotesque">Match the Symbols</h1>
       <div className="grid gap-5 grid-cols-4">
         {grid.map((p, idx) => (
