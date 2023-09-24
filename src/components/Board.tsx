@@ -8,17 +8,16 @@ type selected = {
   contents: number | null;
 };
 
+const selectedInit = {
+  gridNo: null,
+  contents: null,
+};
+
 const grid = gridGenerate();
 
 function Board() {
-  const [selected1, setSelected1] = useState<selected>({
-    gridNo: null,
-    contents: null,
-  });
-  const [selected2, setSelected2] = useState<selected>({
-    gridNo: null,
-    contents: null,
-  });
+  const [selected1, setSelected1] = useState<selected>(selectedInit);
+  const [selected2, setSelected2] = useState<selected>(selectedInit);
 
   const turns = useBoardStore((state) => state.turns);
   const updateTurns = useBoardStore((state) => state.updateTurn);
@@ -127,45 +126,48 @@ function Board() {
       } else
         setTimeout(() => {
           reset();
-          setSelected1({
-            gridNo: null,
-            contents: null,
-          });
-          setSelected2({
-            gridNo: null,
-            contents: null,
-          });
-        }, 2000);
+          setSelected1(selectedInit);
+          setSelected2(selectedInit);
+        }, 1000);
     }
   }
 
   return (
-    <div className="grid gap-5 grid-cols-4">
-      {grid.map((p, idx) => (
-        <button
-          key={idx}
-          onClick={() => {
-            updateTurns();
-            boardData[idx].stateFunction(true);
-            const h = {
-              gridNo: idx,
-              contents: p,
-            };
-            update(h);
-          }}
-          disabled={turns == 2 || boardData[idx].stateCorrect}
-          className={
-            boardData[idx].stateVariable || boardData[idx].stateCorrect
-              ? "bg-secondary w-40 aspect-[3/4] rounded-md flex items-center justify-center"
-              : "bg-primary w-40 aspect-[3/4] rounded-md flex items-center justify-center"
-          }
-        >
-          <div className={boardData[idx].stateVariable ? "" : ""}>
-            <Symbol symbol={p} />
-          </div>
-        </button>
-      ))}
-    </div>
+    <main className="flex flex-col items-center justify-center gap-20">
+      <h1 className="text-5xl font-bricolageGrotesque">Match the Symbols</h1>
+      <div className="grid gap-5 grid-cols-4">
+        {grid.map((p, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              updateTurns();
+              boardData[idx].stateFunction(true);
+              const h = {
+                gridNo: idx,
+                contents: p,
+              };
+              update(h);
+            }}
+            disabled={turns == 2 || boardData[idx].stateCorrect}
+            className={
+              boardData[idx].stateVariable || boardData[idx].stateCorrect
+                ? "bg-secondary w-40 aspect-[3/4] rounded-md flex items-center justify-center"
+                : "bg-primary w-40 aspect-[3/4] rounded-md flex items-center justify-center"
+            }
+          >
+            <div
+              className={
+                boardData[idx].stateVariable || boardData[idx].stateCorrect
+                  ? ""
+                  : "hidden"
+              }
+            >
+              <Symbol symbol={p} />
+            </div>
+          </button>
+        ))}
+      </div>
+    </main>
   );
 }
 
