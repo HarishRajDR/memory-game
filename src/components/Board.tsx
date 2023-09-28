@@ -123,6 +123,7 @@ function Board() {
       ) {
         boardData[selected1.gridNo].stateCFunction();
         boardData[selected2.gridNo].stateCFunction();
+        win();
         resetTurns();
       } else
         setTimeout(() => {
@@ -131,6 +132,11 @@ function Board() {
           setSelected2(selectedInit);
         }, 1000);
     }
+  }
+
+  function win() {
+    const won = boardData.every((p) => p.stateCorrect);
+    console.log(won);
   }
 
   return (
