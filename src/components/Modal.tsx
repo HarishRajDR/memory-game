@@ -4,6 +4,7 @@ import { Fragment } from "react";
 type Props = {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  timeTaken: number;
 };
 
 function Modal(props: Props) {
@@ -46,8 +47,8 @@ function Modal(props: Props) {
                   {"You've won!"}
                 </Dialog.Title>
                 <div className="my-10">
-                  <p className="text-sm text-center text-gray-300">
-                    {"You've won!"}
+                  <p className="text-2xl text-center text-gray-300">
+                    {`Time Taken: ${props.timeTaken}s`}
                   </p>
                 </div>
 

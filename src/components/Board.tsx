@@ -16,6 +16,10 @@ const selectedInit = {
 
 const grid = gridGenerate();
 
+var startTime: Date;
+var stopTime: Date;
+var timeTaken: number;
+
 function Board() {
   const [selected1, setSelected1] = useState<selected>(selectedInit);
   const [selected2, setSelected2] = useState<selected>(selectedInit);
@@ -127,7 +131,6 @@ function Board() {
       ) {
         boardData[selected1.gridNo].stateCFunction();
         boardData[selected2.gridNo].stateCFunction();
-        win();
         resetTurns();
       } else
         setTimeout(() => {
@@ -142,13 +145,15 @@ function Board() {
     const won = boardData.every((p) => p.stateCorrect);
     if (won) {
       setIsOpen(true);
+      stopTime = new Date();
+      timeTaken = (stopTime.getTime() - startTime.getTime()) / 1000;
     }
   }
 
   return (
     <main className="flex flex-col items-center justify-center gap-20">
       <h1 className="text-5xl font-bricolageGrotesque">Match the Symbols</h1>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal timeTaken={timeTaken} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="grid gap-5 grid-cols-4">
         {grid.map((p, idx) => (
           <button
@@ -160,6 +165,9 @@ function Board() {
                 gridNo: idx,
                 contents: p,
               };
+              if (startTime == null) {
+                startTime = new Date();
+              }
               update(h);
             }}
             disabled={
