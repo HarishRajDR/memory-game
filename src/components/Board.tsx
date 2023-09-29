@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { gridGenerate } from "../lib/grid";
 import { useBoardStore } from "../lib/store";
 import Symbol from "./Symbol";
+import Modal from "./Modal";
 
 type selected = {
   gridNo: number | null;
@@ -18,6 +19,8 @@ const grid = gridGenerate();
 function Board() {
   const [selected1, setSelected1] = useState<selected>(selectedInit);
   const [selected2, setSelected2] = useState<selected>(selectedInit);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const turns = useBoardStore((state) => state.turns);
   const updateTurns = useBoardStore((state) => state.updateTurn);
@@ -102,6 +105,7 @@ function Board() {
 
   useEffect(() => {
     check();
+    win();
   }, [turns]);
 
   function update(h: selected) {
@@ -136,12 +140,15 @@ function Board() {
 
   function win() {
     const won = boardData.every((p) => p.stateCorrect);
-    console.log(won);
+    if (won) {
+      setIsOpen(true);
+    }
   }
 
   return (
     <main className="flex flex-col items-center justify-center gap-20">
       <h1 className="text-5xl font-bricolageGrotesque">Match the Symbols</h1>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="grid gap-5 grid-cols-4">
         {grid.map((p, idx) => (
           <button
