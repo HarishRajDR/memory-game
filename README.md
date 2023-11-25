@@ -9,6 +9,7 @@ Concentration is a circular game where all cards are placed face down on a surfa
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Zustand](https://zustand-demo.pmnd.rs/)
 - [Vercel](https://vercel.com/)
 
 ## Contributing
