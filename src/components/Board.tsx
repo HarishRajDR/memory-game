@@ -152,7 +152,6 @@ function Board() {
 
   return (
     <main className="flex flex-col items-center justify-center gap-20">
-      <h1 className="text-5xl font-bricolageGrotesque">Match the Symbols</h1>
       <Modal timeTaken={timeTaken} isOpen={isOpen} setIsOpen={setIsOpen} />
       <div className="grid gap-5 grid-cols-4">
         {grid.map((p, idx) => (
@@ -177,8 +176,8 @@ function Board() {
             }
             className={
               boardData[idx].stateVariable || boardData[idx].stateCorrect
-                ? "bg-secondary w-40 aspect-[3/4] rounded-md flex items-center justify-center"
-                : "bg-primary w-40 aspect-[3/4] rounded-md flex items-center justify-center"
+                ? "bg-secondary w-[calc(100vw/5)] md:w-40 aspect-[3/4] rounded-md flex items-center justify-center"
+                : "bg-primary w-[calc(100vw/5)] md:w-40 aspect-[3/4] rounded-md flex items-center justify-center"
             }
           >
             <div
