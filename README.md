@@ -9,11 +9,12 @@ Concentration is a circular game where all cards are placed face down on a surfa
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Zustand](https://zustand-demo.pmnd.rs/)
 - [Vercel](https://vercel.com/)
 
 ## Contributing
 
-If you'd like to contribute to "Tell Me In," feel free to fork the repository and submit a pull request. For major changes, please open an issue first to discuss the proposed changes.
+If you'd like to contribute to "memory-game" feel free to fork the repository and submit a pull request. For major changes, please open an issue first to discuss the proposed changes.
 
 ## License
 
