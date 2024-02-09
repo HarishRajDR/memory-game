@@ -4,7 +4,7 @@ type Props = {
 
 function Symbol(props: Props) {
   return (
-    <div>
+    <div className="p-3">
       <img src={`/${props.symbol}.svg`} width={100} />
     </div>
   );

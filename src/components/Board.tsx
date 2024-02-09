@@ -153,7 +153,7 @@ function Board() {
   return (
     <main className="flex flex-col items-center justify-center gap-20">
       <Modal timeTaken={timeTaken} isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="grid gap-5 grid-cols-4">
+      <div className="grid gap-[calc(10vw/4)] md:gap-5 grid-cols-4">
         {grid.map((p, idx) => (
           <button
             key={idx}
