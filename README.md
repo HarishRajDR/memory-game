@@ -2,7 +2,7 @@
 
 ## Overview
 
-Concentration is a circular game where all cards are placed face down on a surface, and two cards are revealed in each turn. The goal of the game is to uncover pairs of matching cards.
+"Memory Game" is a circular game where all cards are placed face down on a surface, and two cards are revealed in each turn. The goal of the game is to uncover pairs of matching cards.
 
 ## Technologies Used
 
